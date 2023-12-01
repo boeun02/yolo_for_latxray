@@ -1,0 +1,6 @@
+train: /content/drive/MyDrive/006_BMS/0002_latxray_training/train
+val: /content/drive/MyDrive/006_BMS/0002_latxray_training/test
+
+nc: 19
+
+names: ["T11", "L2", "L3", "L1", "T12", "T7", "L5", "T8", "L4", "T9", "latLSpine", "T10", "Spine", "Screw", "T5", "T6", "S1", "latSacrum", "Cage"]

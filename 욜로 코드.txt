@@ -1,0 +1,34 @@
+<욜로코드>
+007 라벨링한 자료로 yolo format만들기에서 영상 참고
+영상 3분 28초 부터 보기
+구글 코랩 들어가서 드라이브 동기화 시키고 런타임 설정에서 cpu말고 gpu로 하기. <- 나중에 오류남
+드라이브 꽉차면 동기화가 더뎌져서 계속 튕길 우려 있으니 주의
+pip install labelme2yolo
+cd 명령어로 dataset의 상위 파일까지 디렉터리 이동
+labelme2yolo --json_dir dataset/train
+labelme2yolo --json_dir dataset/test
+영상 4분 참고하여 이미지와 라벨파일, yaml 파일 위치 조정
+sublime text 프로그램 깔고 안에 이미지 경로 조정 이미지 있는 경로로 바꿔주고 train: 의 맨 뒤엔 /train, val: 의 맨 뒤엔 /test 해주고 test: 의 문장 삭제
+pip install ultralytics
+python
+import torch
+torch.cuda.is_available()
+true 나오면 계속 진행 false나오면 영상 7분 15초부터 8분 14초까지 참고
+yolo task=segment mode=train epochs=100 data=dataset.yaml model=yolov8m-seg.pt imgsz=416 batch=4 (시간소요 심함)
+-> 영상이랑 이미지 크기랑 배치 다른 이유는 ram 사용량이 너무 커서 튕기기 때문에.
+영상 9분 40초 부터 파일 이동 참고
+<predict.py안의 코드>
+from ultraytics import YOLO
+model = YOLO("yolov8m-seg-custom.pt")
+model.prediict(source = "1.png", show=True, save=True, show_labels=True, show_conf=True, conf=0.5f, save_txt=False, save_crop=False, line_thickness=2, box=True, visualize=False) 자세한건 영상 참고 계속 바꿔서 씀
+근데 hide_labels, hide_conf는 show로 바꿔서 쓰기 오류남
+구글 코랩에서 python predict.py 하면 predict파일이 생성된다
+
+
+<이어서 할 때 필요한 다시 적고 시작해야하는 코드들>
+pip install labelme2yolo
+cd drive/MyDrive/006_BMS/0002_latxray_training
+pip install ultralytics
+
+<딥러닝 전에 썼던 코드>
+yolo task=segment mode=train epochs=100 data=dataset.yaml model=yolov8m-seg.pt imgsz=416 batch=4
